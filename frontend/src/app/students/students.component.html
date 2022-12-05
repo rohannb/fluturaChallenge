@@ -1,0 +1,12 @@
+<table *ngIf="students">
+    <tr>
+        <th>Name</th>
+        <th>Id</th>
+        <th>HouseId</th>
+    </tr>
+    <tr *ngFor="let student of students">
+        <td>{{ student.name }}</td>
+        <td>{{ student.id }}</td>
+        <td>{{ student.houseId }}</td>
+    </tr>
+</table>
