@@ -1,0 +1,8 @@
+<h2>Register new student</h2>
+
+<form [formGroup]="form">
+    Name: <input type = "text" formControlName="name"/><br>
+    House id: <input type = "text" formControlName="houseId"/><br>
+    Address: <input type = "text" formControlName="address"/><br>
+    <button (click)="registerStudent($event)">Register!</button>
+</form>

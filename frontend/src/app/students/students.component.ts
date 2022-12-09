@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Router } from '@angular/router';
 import { StudentServiceService } from 'src/services/student-service.service';
 
 @Component({
@@ -7,13 +8,24 @@ import { StudentServiceService } from 'src/services/student-service.service';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
-  constructor(private studentService: StudentServiceService) { }
+  constructor(
+    private studentService: StudentServiceService,
+    private router: Router
+    ) { }
   students!: any;
+  houses!: any;
 
   ngOnInit(): void {
     this.studentService.getStudents().subscribe(data => {
       this.students = data;
-      console.log(this.students);
     });
+    this.studentService.getHouses().subscribe(data => {
+      this.houses = data;
+    });
+  }
+
+  updateStudent(data: any) {
+    this.studentService.setUpdateStudent(data)
+    this.router.navigate([`/updateStudent`])
   }
 }

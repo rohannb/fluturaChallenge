@@ -1,12 +1,27 @@
+<h3>Student list</h3>
 <table *ngIf="students">
     <tr>
         <th>Name</th>
         <th>Id</th>
         <th>HouseId</th>
+        <th>Address</th>
     </tr>
     <tr *ngFor="let student of students">
-        <td>{{ student.name }}</td>
+        <span (click)="updateStudent(student)"><td>{{ student.name }}</td></span>
         <td>{{ student.id }}</td>
         <td>{{ student.houseId }}</td>
+        <td>{{ student.address }}</td>
+    </tr>
+</table>
+<br><br>
+<h3>House list</h3>
+<table *ngIf="houses">
+    <tr>
+        <th>Name</th>
+        <th>Id</th>
+    </tr>
+    <tr *ngFor="let house of houses">
+        <td>{{ house.name }}</td>
+        <td>{{ house.id }}</td>
     </tr>
 </table>

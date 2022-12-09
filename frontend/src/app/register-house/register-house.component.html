@@ -1,0 +1,6 @@
+<h2>Register new house</h2>
+
+<form [formGroup]="form">
+    House name: <input type = "text" formControlName="name"/><br>
+    <button (click)="registerHouse($event)">Register!</button>
+</form>

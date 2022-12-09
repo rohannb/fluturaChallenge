@@ -14,11 +14,18 @@ app.get('/getStudents', (req, res) => {
     res.send(students.filter(student => student.houseId == id));
 })
 
+app.get('/getHouses', (req, res) => {
+    const id = req.query.id;
+    if (!id) res.send(houses);
+    res.send(houses.filter(house => house.id == id));
+})
+
 app.post('/registerStudent', (req, res) => {
-    if (!req.body.name || !req.body.houseId || !req.body.id) return res.status(400).send(`Name, id and house id are mandatory`)
+    if (!req.body.name || !req.body.houseId) return res.status(400).send(`Name, id and house id are mandatory`)
+    req.body.id = students.length + 1;
     students.push(req.body)
     writeStudentsJson();
-    res.status(200);
+    res.sendStatus(200);
 })
 
 app.put('/updateStudent', (req, res) => {   //should allow to remove address
@@ -33,10 +40,11 @@ app.put('/updateStudent', (req, res) => {   //should allow to remove address
 })
 
 app.post('/registerHouse', (req, res) => {
-    if (!req.body.name || !req.body.id) return res.status(400).send(`Name and id are mandatory`)
+    if (!req.body.name) return res.status(400).send(`House name is mandatory`)
+    req.body.id = houses[houses.length - 1].id + 1;
     houses.push(req.body)
     writeHousesJson();
-    res.status(200);
+    res.sendStatus(200);
 })
 
 app.post('/addStudentsToHouse', (req, res) => {
@@ -45,7 +53,7 @@ app.post('/addStudentsToHouse', (req, res) => {
     const ids: [] = req.body.ids;
     ids.forEach(id => students[students.findIndex(obj => obj.id == id)].houseId = houseId)
     writeStudentsJson();
-    return res.status(200);
+    return res.sendStatus(200);
 })
 
 let writeStudentsJson = () => fs.writeFileSync(`./data/students.json`, JSON.stringify(students));
