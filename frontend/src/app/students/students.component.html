@@ -7,7 +7,7 @@
         <th>Address</th>
     </tr>
     <tr *ngFor="let student of students">
-        <span (click)="updateStudent(student)"><td>{{ student.name }}</td></span>
+        <span (click)="updateStudent(student)"><td id = {{student.id}} draggable="true" (dragstart)="dragStart($event)">{{ student.name }}</td></span>
         <td>{{ student.id }}</td>
         <td>{{ student.houseId }}</td>
         <td>{{ student.address }}</td>
@@ -20,7 +20,7 @@
         <th>Name</th>
         <th>Id</th>
     </tr>
-    <tr *ngFor="let house of houses">
+    <tr *ngFor="let house of houses" id = {{house.id}} (dragover)="drop($event)">
         <td>{{ house.name }}</td>
         <td>{{ house.id }}</td>
     </tr>

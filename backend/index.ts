@@ -36,7 +36,7 @@ app.put('/updateStudent', (req, res) => {   //should allow to remove address
         students[index][key] = body[key];
     }
     writeStudentsJson();
-    res.send(`Student updated successfully`).status(200);
+    res.sendStatus(200);
 })
 
 app.post('/registerHouse', (req, res) => {

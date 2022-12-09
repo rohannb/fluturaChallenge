@@ -14,6 +14,7 @@ export class StudentsComponent implements OnInit {
     ) { }
   students!: any;
   houses!: any;
+  dragId!: number;
 
   ngOnInit(): void {
     this.studentService.getStudents().subscribe(data => {
@@ -27,5 +28,15 @@ export class StudentsComponent implements OnInit {
   updateStudent(data: any) {
     this.studentService.setUpdateStudent(data)
     this.router.navigate([`/updateStudent`])
+  }
+
+  drop(data: any){
+    const houseId = data.currentTarget.id;
+    this.studentService.updateStudent({id: this.dragId, houseId: parseInt(houseId)}).subscribe();
+    window.location.reload();
+  }
+
+  dragStart(data: any){
+    this.dragId = parseInt(data.target.id);
   }
 }
